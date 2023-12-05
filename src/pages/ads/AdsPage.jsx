@@ -1,28 +1,21 @@
-const ads = [
-	{
-		name: 'old car',
-		sale: true,
-		price: 10000,
-		tags: ['motor'],
-		photo: '',
-	},
-	{
-		name: 'iphone',
-		sale: false,
-		price: 500,
-		tags: ['mobile'],
-		photo: '',
-	},
-];
-
 // tags: lifestyle, mobile, motor, work
 
+// import { useEffect, useState } from 'react';
+// import { getAds } from './service';
+
 function AdsPage() {
+	// const [ads, setAds] = useState([]);
+
+	// useEffect(() => {
+	// 	getAds().then((ads) => setAds(ads));
+	// }, []);
+
 	return (
 		<div>
 			<ul>
-				<li>{ads[0].name}</li>
-				<li>{ads[1].name}</li>
+				{/* {ads.map((ad) => (
+					<li key={ad.id}>{ad.name}</li>
+				))} */}
 			</ul>
 		</div>
 	);
