@@ -16,6 +16,7 @@ function AdsPage() {
 				{/* {ads.map((ad) => (
 					<li key={ad.id}>{ad.name}</li>
 				))} */}
+				<h1>YOU ARE LOGGED</h1>
 			</ul>
 		</div>
 	);
