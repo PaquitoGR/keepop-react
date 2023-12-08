@@ -1,5 +1,5 @@
 function Footer() {
-	return <footer></footer>;
+	return <footer>@2023 KeePoP</footer>;
 }
 
 export default Footer;

@@ -1,8 +1,7 @@
 import Button from '../../components/Button';
 import { useState } from 'react';
-import { signup } from './service';
+import { signup } from './service.js';
 
-// eslint-disable-next-line react/prop-types
 function SignupPage({ onSignup }) {
 	const [userData, setUserData] = useState({
 		email: '',
