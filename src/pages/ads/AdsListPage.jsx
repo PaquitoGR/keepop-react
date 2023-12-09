@@ -3,6 +3,7 @@ import { getAds } from './service';
 import Content from '../../components/layout/Content';
 import Button from '../../components/Button';
 import { Link } from 'react-router-dom';
+import AdCard from '../../components/layout/AdCard';
 
 const NoAds = () => (
 	<div>
@@ -30,11 +31,7 @@ function AdsListPage() {
 						{ads.map((ad) => (
 							<li key={ad.id}>
 								<Link to={`/ads/${ad.id}`}>
-									<img src={ad.photo} width='150'></img>
-									<p>Item: {ad.name}</p>
-									<p>Type: {ad.sale ? 'sale' : 'buy'}</p>
-									<p>Price: {ad.price}</p>
-									<p>Tags: {ad.tags}</p>
+									<AdCard ad={ad} imgWidth='100px' />
 								</Link>
 							</li>
 						))}
