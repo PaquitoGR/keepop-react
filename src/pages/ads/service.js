@@ -15,3 +15,7 @@ export const uploadAd = (data) => {
 		headers: { 'Content-Type': 'multipart/form-data' },
 	});
 };
+
+export const deleteAd = (id) => {
+	return client.delete(`${url}/${id}`);
+};
