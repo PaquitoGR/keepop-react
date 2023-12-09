@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router';
 import Content from '../../components/layout/Content';
 import { useEffect, useState } from 'react';
-import { getAds } from './service';
+import { getAd } from './service';
 import AdCard from '../../components/layout/AdCard';
 
 function AdDetailPage() {
@@ -11,8 +11,7 @@ function AdDetailPage() {
 	const [ad, setAd] = useState(null);
 
 	useEffect(() => {
-		const url = `/api/v1/adverts/${adId}`;
-		getAds(url)
+		getAd(adId)
 			.then((ad) => setAd(ad))
 			.catch((error) => {
 				if (error.status === 404) {
