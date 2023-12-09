@@ -5,12 +5,20 @@ import AdDetailPage from './pages/ads/AdDetailPage.jsx';
 import AdCreatePage from './pages/ads/AdCreatePage.jsx';
 import Layout from './components/layout/Layout';
 import NotForundPage from './pages/ads/NotFoundPage.jsx';
+import RequireAuth from './pages/auth/components/RequireAuth.jsx';
 
 function App() {
 	return (
 		<Routes>
 			<Route path='/login' element={<LoginPage />} />
-			<Route path='/ads' element={<Layout />}>
+			<Route
+				path='/ads'
+				element={
+					<RequireAuth>
+						<Layout />
+					</RequireAuth>
+				}
+			>
 				<Route index element={<AdsListPage />} />
 				<Route path=':adId' element={<AdDetailPage />} />
 				<Route path='new' element={<AdCreatePage />} />

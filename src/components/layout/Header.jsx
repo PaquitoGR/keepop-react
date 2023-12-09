@@ -5,7 +5,7 @@ import AuthButton from '../../pages/auth/components/AuthButton';
 function Header() {
 	return (
 		<header>
-			<Link to='/'>
+			<Link to='/ads'>
 				<div>
 					<img src={logo} width='75' alt='logo keepop' />
 				</div>

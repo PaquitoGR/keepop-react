@@ -8,7 +8,7 @@ function RequireAuth({ children }) {
 	return isLogged ? (
 		children
 	) : (
-		<Navigate to='/login' state={{ from: location }} />
+		<Navigate to='/login' replace state={{ from: location }} />
 	);
 }
 
