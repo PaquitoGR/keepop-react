@@ -1,22 +1,21 @@
 import logo from '../../assets/images/keepop-logo.png';
-import Button from '../Button';
-import { logout } from '../../pages/auth/service';
-import { useAuth } from '../../pages/auth/context';
+import { Link, NavLink } from 'react-router-dom';
+import AuthButton from '../../pages/auth/components/AuthButton';
 
 function Header() {
-	const { isLogged, onLogout } = useAuth();
-	const handleLogout = async () => {
-		await logout();
-		onLogout();
-	};
-
 	return (
 		<header>
-			<div>
-				<img src={logo} width='75' alt='logo keepop' />
-			</div>
+			<Link to='/'>
+				<div>
+					<img src={logo} width='75' alt='logo keepop' />
+				</div>
+			</Link>
 			<nav>
-				{isLogged ? <Button onClick={handleLogout}>Logout</Button> : <></>}
+				<NavLink to='/ads/new'>Create new advert</NavLink>
+				<NavLink to='/ads' end>
+					Ads List
+				</NavLink>
+				<AuthButton />
 			</nav>
 		</header>
 	);

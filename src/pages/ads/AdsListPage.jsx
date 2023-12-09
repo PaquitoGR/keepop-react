@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import { getAds } from './service';
-import Layout from '../../components/layout/Layout';
+import Content from '../../components/layout/Content';
 import Button from '../../components/Button';
+import { Link, Navigate } from 'react-router-dom';
 
 const NoAds = () => (
 	<div>
 		<p>No adverts yet!</p>
-		<Button>Create Ad</Button>
+		<Button as={Link} to='/ads/new'>
+			Create Ad
+		</Button>
 	</div>
 );
 
-function AdsPage() {
+function AdsListPage() {
 	const [ads, setAds] = useState([]);
 
 	const url = '/api/v1/adverts';
@@ -20,7 +23,7 @@ function AdsPage() {
 	}, []);
 
 	return (
-		<Layout title='Ad list'>
+		<Content title='Ad list'>
 			<div>
 				{ads.length ? (
 					<ul>
@@ -38,8 +41,8 @@ function AdsPage() {
 					<NoAds />
 				)}
 			</div>
-		</Layout>
+		</Content>
 	);
 }
 
-export default AdsPage;
+export default AdsListPage;

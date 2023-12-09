@@ -1,22 +1,35 @@
 import { useState } from 'react';
 import Button from '../../components/Button';
 import { login } from './service.js';
-import Layout from '../../components/layout/Layout.jsx';
-import { useAuth } from './context.jsx';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuthHandlers } from '../auth/context.jsx';
 
 function LoginPage() {
-	const { onLogin } = useAuth();
+	const { onLogin } = useAuthHandlers();
 	const [credentials, setCredentials] = useState({
 		email: '',
 		password: '',
-		remember: false,
+		rememberMe: false,
 	});
+
+	const [isFetching, setIsFetching] = useState(false);
+	const location = useLocation();
+	const navigate = useNavigate();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
-		await login(credentials);
-		onLogin();
+		try {
+			setIsFetching(true);
+			await login(credentials);
+			setIsFetching(false);
+			onLogin();
+			const to = location?.state?.from?.pathname || '/';
+			navigate(to);
+		} catch (error) {
+			setIsFetching(false);
+			console.log(error);
+		}
 	};
 
 	const handleChange = (event) => {
@@ -32,35 +45,34 @@ function LoginPage() {
 	const disabled = !(credentials.email && credentials.password);
 
 	return (
-		<Layout title='Login'>
-			<div>
-				<form onSubmit={handleSubmit}>
-					<input
-						type='text'
-						name='email'
-						value={credentials.email}
-						onChange={handleChange}
-					/>
-					<input
-						type='password'
-						name='password'
-						value={credentials.password}
-						onChange={handleChange}
-					/>
-					<label htmlFor='remember'>Remember me</label>
-					<input
-						id='remember'
-						name='remember'
-						type='checkbox'
-						checked={credentials.remember}
-						onChange={handleChange}
-					/>
-					<Button type='submit' disabled={disabled}>
-						Log in
-					</Button>
-				</form>
-			</div>
-		</Layout>
+		<div>
+			<h1>Login</h1>
+			<form onSubmit={handleSubmit}>
+				<input
+					type='text'
+					name='email'
+					value={credentials.email}
+					onChange={handleChange}
+				/>
+				<input
+					type='password'
+					name='password'
+					value={credentials.password}
+					onChange={handleChange}
+				/>
+				<label htmlFor='rememberMe'>Remember me</label>
+				<input
+					id='rememberMe'
+					name='rememberMe'
+					type='checkbox'
+					checked={credentials.remember}
+					onChange={handleChange}
+				/>
+				<Button type='submit' disabled={disabled}>
+					{isFetching ? 'Loading...' : 'Log in'}
+				</Button>
+			</form>
+		</div>
 	);
 }
 
