@@ -1,11 +1,10 @@
 import logo from '../../assets/images/keepop-logo.png';
 import Button from '../Button';
 import { logout } from '../../pages/auth/service';
-import { useContext } from 'react';
-import { AuthContext } from '../../pages/auth/context';
+import { useAuth } from '../../pages/auth/context';
 
-function Header({ isLogged, onLogout }) {
-	const { isLogged, onLogout } = useContext(AuthContext);
+function Header() {
+	const { isLogged, onLogout } = useAuth();
 	const handleLogout = async () => {
 		await logout();
 		onLogout();
@@ -17,11 +16,7 @@ function Header({ isLogged, onLogout }) {
 				<img src={logo} width='75' alt='logo keepop' />
 			</div>
 			<nav>
-				{isLogged ? (
-					<Button onClick={handleLogout}>Logout</Button>
-				) : (
-					<Button /*onClick={handleLogin}*/>Login</Button>
-				)}
+				{isLogged ? <Button onClick={handleLogout}>Logout</Button> : <></>}
 			</nav>
 		</header>
 	);

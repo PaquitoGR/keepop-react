@@ -1,15 +1,16 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import Button from '../../components/Button';
 import { login } from './service.js';
 import Layout from '../../components/layout/Layout.jsx';
-import { AuthContext } from './context.js';
+import { useAuth } from './context.jsx';
 
 function LoginPage() {
+	const { onLogin } = useAuth();
 	const [credentials, setCredentials] = useState({
 		email: '',
 		password: '',
+		remember: false,
 	});
-	const { onLogin } = useContext(AuthContext);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -21,7 +22,10 @@ function LoginPage() {
 	const handleChange = (event) => {
 		setCredentials((currentCredentials) => ({
 			...currentCredentials,
-			[event.target.name]: event.target.value,
+			[event.target.name]:
+				event.target.type === 'checkbox'
+					? event.target.checked
+					: event.target.value,
 		}));
 	};
 
@@ -41,6 +45,14 @@ function LoginPage() {
 						type='password'
 						name='password'
 						value={credentials.password}
+						onChange={handleChange}
+					/>
+					<label htmlFor='remember'>Remember me</label>
+					<input
+						id='remember'
+						name='remember'
+						type='checkbox'
+						checked={credentials.remember}
 						onChange={handleChange}
 					/>
 					<Button type='submit' disabled={disabled}>

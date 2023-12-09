@@ -7,7 +7,10 @@ import storage from '../../utils/storaje';
 export const login = (credentials) => {
 	return client.post('/api/auth/login', credentials).then(({ accessToken }) => {
 		setAuthorizationHeader(accessToken);
-		storage.set('token', accessToken);
+		console.log(credentials);
+		if (credentials.remember) {
+			storage.set('token', accessToken);
+		}
 	});
 };
 
