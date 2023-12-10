@@ -1,34 +1,30 @@
-import { useEffect, useState } from 'react';
-import { getAds } from './service';
+import { useState } from 'react';
 import Content from '../../components/layout/Content';
 import Button from '../../components/Button';
 import { Link } from 'react-router-dom';
 import AdCard from '../../components/layout/AdCard';
-
-const NoAds = () => (
-	<div>
-		<p>No adverts yet!</p>
-		<Button as={Link} to='/ads/new'>
-			Create Ad
-		</Button>
-	</div>
-);
+import './AdsListPage.css';
+import AdFilter from './AdFilter';
 
 function AdsListPage() {
-	const [ads, setAds] = useState([]);
+	const NoAds = () => (
+		<div>
+			<p>No adverts yet!</p>
+			<Button as={Link} to='/ads/new'>
+				Create Ad
+			</Button>
+		</div>
+	);
 
-	const url = '/api/v1/adverts';
-
-	useEffect(() => {
-		getAds(url).then((ads) => setAds(ads));
-	}, []);
+	const [filteredAds, setFilteredAds] = useState([]);
 
 	return (
 		<Content title='Ad list'>
+			<AdFilter className='filterForm' setFilteredAds={setFilteredAds} />
 			<div>
-				{ads.length ? (
+				{filteredAds.length ? (
 					<ul>
-						{ads.map((ad) => (
+						{filteredAds.map((ad) => (
 							<li key={ad.id}>
 								<Link to={`/ads/${ad.id}`}>
 									<AdCard ad={ad} imgWidth='100px' />

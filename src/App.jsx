@@ -24,7 +24,9 @@ function App() {
 				<Route path='new' element={<AdCreatePage />} />
 			</Route>
 			<Route path='/' element={<Navigate to='/ads' />} />
-			<Route path='/404' element={<NotForundPage />} />
+			<Route path='/404' element={<Layout />}>
+				<Route element={<NotForundPage />} />
+			</Route>
 			<Route path='*' element={<Navigate to='/404' />} />
 		</Routes>
 	);

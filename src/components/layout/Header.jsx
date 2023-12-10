@@ -1,6 +1,7 @@
 import logo from '../../assets/images/keepop-logo.png';
 import { Link, NavLink } from 'react-router-dom';
 import AuthButton from '../../pages/auth/components/AuthButton';
+import Button from '../Button';
 
 function Header() {
 	return (
@@ -11,9 +12,11 @@ function Header() {
 				</div>
 			</Link>
 			<nav>
-				<NavLink to='/ads/new'>Create new advert</NavLink>
+				<NavLink to='/ads/new'>
+					<Button>Create new advert</Button>
+				</NavLink>
 				<NavLink to='/ads' end>
-					Ads List
+					<Button>Ads List</Button>
 				</NavLink>
 				<AuthButton />
 			</nav>
