@@ -8,7 +8,7 @@ const AdForm = () => {
 	const [adData, setAdData] = useState({
 		name: '',
 		sale: undefined,
-		price: 0,
+		price: '',
 		tags: [],
 		photo: null,
 	});
