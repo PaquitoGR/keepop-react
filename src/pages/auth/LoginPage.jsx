@@ -3,6 +3,7 @@ import Button from '../../components/Button';
 import { login } from './service.js';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthHandlers } from '../auth/context.jsx';
+import './LoginPage.css';
 
 function LoginPage() {
 	const { onLogin } = useAuthHandlers();
@@ -45,32 +46,40 @@ function LoginPage() {
 	const disabled = !(credentials.email && credentials.password);
 
 	return (
-		<div>
-			<h1>Login</h1>
+		<div className='form-container'>
+			<h2>Login</h2>
 			<form onSubmit={handleSubmit}>
-				<input
-					type='text'
-					name='email'
-					value={credentials.email}
-					onChange={handleChange}
-				/>
-				<input
-					type='password'
-					name='password'
-					value={credentials.password}
-					onChange={handleChange}
-				/>
-				<label htmlFor='rememberMe'>Remember me</label>
-				<input
-					id='rememberMe'
-					name='rememberMe'
-					type='checkbox'
-					checked={credentials.remember}
-					onChange={handleChange}
-				/>
-				<Button type='submit' disabled={disabled}>
-					{isFetching ? 'Loading...' : 'Log in'}
-				</Button>
+				<div className='form-row'>
+					<input
+						placeholder='email'
+						type='text'
+						name='email'
+						value={credentials.email}
+						onChange={handleChange}
+					/>
+					<input
+						placeholder='password'
+						type='password'
+						name='password'
+						value={credentials.password}
+						onChange={handleChange}
+					/>
+				</div>
+				<div className='form-row'>
+					<Button type='submit' disabled={disabled}>
+						{isFetching ? 'Loading...' : 'Log in'}
+					</Button>
+					<div className='rememberMe'>
+						<label htmlFor='rememberMe'>Remember me</label>
+						<input
+							id='rememberMe'
+							name='rememberMe'
+							type='checkbox'
+							checked={credentials.remember}
+							onChange={handleChange}
+						/>
+					</div>
+				</div>
 			</form>
 		</div>
 	);

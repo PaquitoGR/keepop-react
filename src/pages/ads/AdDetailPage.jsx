@@ -60,13 +60,15 @@ function AdDetailPage() {
 
 	return (
 		<Content title='Ad detail'>
-			{ad && <AdCard ad={ad} imgWidth='300px' />}
-			<Button onClick={handleDeleteAd}>Delete Ad</Button>
-			<ConfirmationModal
-				show={showModal}
-				onConfirm={confirmDeleteAd}
-				onClose={closeModal}
-			/>
+			<div>
+				{ad && <AdCard ad={ad} imgWidth='300px' />}
+				<Button onClick={handleDeleteAd}>Delete Ad</Button>
+				<ConfirmationModal
+					show={showModal}
+					onConfirm={confirmDeleteAd}
+					onClose={closeModal}
+				/>
+			</div>
 		</Content>
 	);
 }

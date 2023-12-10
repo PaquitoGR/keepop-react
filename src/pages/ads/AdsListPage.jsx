@@ -3,8 +3,8 @@ import Content from '../../components/layout/Content';
 import Button from '../../components/Button';
 import { Link } from 'react-router-dom';
 import AdCard from '../../components/layout/AdCard';
-import './AdsListPage.css';
 import AdFilter from './AdFilter';
+import './AdsListPage.css';
 
 function AdsListPage() {
 	const NoAds = () => (
@@ -27,7 +27,7 @@ function AdsListPage() {
 						{filteredAds.map((ad) => (
 							<li key={ad.id}>
 								<Link to={`/ads/${ad.id}`}>
-									<AdCard ad={ad} imgWidth='100px' />
+									<AdCard ad={ad} imgWidth='100%' />
 								</Link>
 							</li>
 						))}

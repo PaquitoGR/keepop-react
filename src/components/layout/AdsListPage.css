@@ -20,7 +20,7 @@ a {
 	text-decoration: none;
 }
 
-.formContainer > form {
+form {
 	border-radius: 10px;
 	border: 1px solid;
 	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
