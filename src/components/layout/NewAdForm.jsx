@@ -7,8 +7,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const AdForm = () => {
 	const [adData, setAdData] = useState({
 		name: '',
-		sale: false,
-		price: undefined,
+		sale: undefined,
+		price: 0,
 		tags: [],
 		photo: null,
 	});
@@ -21,7 +21,6 @@ const AdForm = () => {
 		setAdData((currentAdData) => ({
 			...currentAdData,
 			[event.target.name]: event.target.value,
-			['sale']: event.target.value === 'true',
 		}));
 	};
 
@@ -46,10 +45,12 @@ const AdForm = () => {
 		event.preventDefault();
 		try {
 			setIsFetching(true);
+
 			adData.tags = tags;
 			adData.photo = photoFile;
-			console.log(adData);
+
 			await uploadAd(adData);
+
 			setIsFetching(false);
 			const to = location?.state?.from?.pathname || '/';
 			navigate(to);
@@ -59,6 +60,13 @@ const AdForm = () => {
 		}
 	};
 
+	const disabled = !(
+		adData.name &&
+		adData.price > 0 &&
+		adData.sale !== undefined &&
+		tags.length
+	);
+
 	return (
 		<form onSubmit={handleSubmit}>
 			<div>
@@ -67,8 +75,8 @@ const AdForm = () => {
 					type='text'
 					name='name'
 					id='name'
+					value={adData.name}
 					onChange={handleChange}
-					required
 				/>
 			</div>
 			<div>
@@ -81,13 +89,19 @@ const AdForm = () => {
 						size='6'
 						id='price'
 						min='0'
+						value={adData.price}
 						onChange={handleChange}
-						required
 					/>
 				</div>
 				<div>
 					<label htmlFor='sale'>Select one:</label>
-					<select id='sale' name='sale' onChange={handleChange}>
+					<select
+						id='sale'
+						name='sale'
+						defaultValue='---'
+						onChange={handleChange}
+					>
+						<option disabled>---</option>
 						<option value='true'>Sale</option>
 						<option value='false'>Buy</option>
 					</select>
@@ -146,7 +160,7 @@ const AdForm = () => {
 			</div>
 			<div>
 				<Button type='reset'>Clear form</Button>
-				<Button type='submit'>
+				<Button type='submit' disabled={disabled}>
 					{isFetching ? 'Uploading...' : 'Upload your Ad'}
 				</Button>
 			</div>
